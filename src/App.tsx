@@ -11,6 +11,7 @@ import Orders from "./pages/Orders";
 import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import Register from "./pages/Register";
 function App() {
   return (
     <Router>
@@ -28,6 +29,7 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </Router>
   );

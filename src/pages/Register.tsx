@@ -1,29 +1,46 @@
-import { useForm } from "react-hook-form";
+//import { useState } from "react";
+//import { useNavigate } from "react-router-dom";
+import {useForm} from "react-hook-form";
 import axios from "axios";
 
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
+
+    interface Formdata{
+    username: string;
+    email: string;
+    password: string;
+}  
+const RegistrationForm = () => {
+
+     const {register , handleSubmit} = useForm <Formdata>();
+
+     const onSubmit = async(data:Formdata)=>{
+    try {
+        const {username , email , password}=data;
+        const formdata =new FormData();
+        formdata.append("username", username);
+        formdata.append("email", email);
+        formdata.append("password", password);
+
+       const res= await axios.post('http://localhost:4000/api/auth/register' , formdata,
+            {
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                
+            }
+        )
+
+         console.log(res);
+
+    }catch (error) {
+        console.log("registration failed", error);
+    
+    }
 }
 
-const RegistrationForm = () => {
-  const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = async (data: FormData) => {
-    try {
-      const res = await axios.post("http://localhost:4000/api/auth/register", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(res);
-    } catch (error) {
-      console.log("Registration failed", error);
-    }
-  };
 
-  return (
+ return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-6">
       {/* Full Name */}
       <input
